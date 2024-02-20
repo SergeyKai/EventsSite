@@ -1,0 +1,65 @@
+.p {
+    -color-text-main: #2d2d2d;
+    --color-text-secondary: #4c4c4c;
+    --color-text-heading: #000;
+    --color-text-invert: #fff;
+    --color-text-control: #000;
+    --color-text-status: #333;
+    --color-text-footer: #676767;
+    --color-background-main: #f6f5f3;
+    --color-background-secondary: #ebebeb;
+    --color-background-menu: #333;
+    --color-background-header: #fc3f1d;
+    --color-background-header-addition: #ff583a;
+    --color-background-pinned: #f7f087;
+    --color-background-disabled: #ddd;
+    --color-control-active: #666;
+    --color-control-hover: #f5f5f5;
+    --color-control-outline: #ccc;
+    --color-link: #000;
+    --color-link-hover: #4d4d4d;
+    --color-link-grey: grey;
+    --color-link-grey-hover: #999;
+    --color-link-action: #04b;
+    --color-link-action-hover: #fc3f1d;
+    --color-accent-main: #ffdb4d;
+    --color-separator: #e5e5e5;
+    --color-border-footer: #ddd;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f6f5f3;
+}
+
+.events_container {
+    margin: 0 auto;
+    width: 90%;
+
+}
+
+.events_container {
+    display: flex;
+    
+}
+
+.event {
+
+    margin: 0 10px;
+    width: 300px;
+    height: 400px;
+
+    background-color: #ffdb4d;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.event_title {
+    text-align: center;
+}

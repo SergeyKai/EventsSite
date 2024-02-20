@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>События</h1>
+
+<div class="events_container">
+
+    {% for event in events %}
+
+    <div class="event">
+
+        <h2 class="event_title" >{{ event.title }}</h2>
+        <img src="{{ event.image.url }}" alt="">
+        <p>
+            {{ event.description }}
+        </p>
+
+        <p>{{ event.event_date }}</p>
+
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
