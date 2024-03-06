@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<h1 class="main-title">События</h1>
+
+<div class="events_container">
+
+    {% for event in events %}
+
+    <div class="event">
+
+        <div class="img_wrapper">
+            <img src="{{ event.image.url }}" alt="">
+        </div>
+
+        <div class="event_info">
+            <span class="event_date">{{ event.event_date }}</span>
+            <h2 class="event_title">{{ event.title }}</h2>
+
+
+        </div>
+
+        <a class="event_link" href="{% url 'event_detail' event.pk %}"></a>
+
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock main %}

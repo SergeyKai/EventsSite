@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+
+{% block main %}
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form }}
+
+    <button type="submit">Зарегистрироваться</button>
+</form>
+
+{% endblock main %}

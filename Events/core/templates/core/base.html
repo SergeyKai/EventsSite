@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+    <script src="https://kit.fontawesome.com/800f121123.js" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,400;0,700;1,500&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+
+    {% block extra_styles %}
+
+    {% endblock extra_styles %}
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<header class="main-header">
+
+    <menu class="main-menu">
+        <li><a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a></li>
+
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'profile' %}">{{ request.user }} <i class="fa-solid fa-user"></i></a></li>
+        {% else %}
+        <li><a href="{% url 'login' %}">Войти <i class="fa-solid fa-right-to-bracket"></i></a></li>
+        <li><a href="{% url 'registration' %}">Зарегистрироваться <i class="fa-solid fa-address-card"></i></a></li>
+
+
+        {% endif %}
+
+    </menu>
+
+</header>
+
+{% block main %}
+
+{% endblock main %}
+
+</body>
+</html>
