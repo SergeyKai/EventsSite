@@ -1,0 +1,73 @@
+.user-form {
+    position: relative;
+
+    width: 40%;
+
+    margin: 11vh auto 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    color: #252124;
+    font-size: 26px;
+
+
+    background: #e1b4ff;
+
+    padding: 7vh;
+
+    border-radius: 20px;
+
+}
+
+.user-form div {
+    position: relative;
+    width: 100%;
+    margin: 10px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+.user-form div .helptext {
+    display: none;
+}
+
+.user-form label {
+    margin: 10px;
+}
+
+.user-form input {
+    width: calc(100% - 20px);
+    height: 35px;
+    padding: 5px 10px;
+
+    color: #252124;
+    font-size: 23px;
+
+    border: none;
+
+    border-radius: 5px;
+}
+
+#id_password_helptext {
+    display: inline;
+}
+
+
+.user-form button {
+    margin-top: 40px;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 3px;
+    background-color: #8647e6;
+    color: #e1b4ff;
+    cursor: pointer;
+    font-size: 27px;
+    transition: all .2s;
+}

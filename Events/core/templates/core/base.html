@@ -27,9 +27,14 @@
 
     <menu class="main-menu">
         <li><a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a></li>
-
         {% if request.user.is_authenticated %}
-        <li><a href="{% url 'profile' %}">{{ request.user }} <i class="fa-solid fa-user"></i></a></li>
+        <li class="user-data"><div class="user-img-wrapper"><img src="{{ request.user.photo.url }}" alt=""></div><a href="{% url 'profile' %}">{{ request.user }} <i class="fa-solid fa-user"></i></a></li>
+        <li>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="logout-btn" type="submit">Выход</button>
+            </form>
+        </li>
         {% else %}
         <li><a href="{% url 'login' %}">Войти <i class="fa-solid fa-right-to-bracket"></i></a></li>
         <li><a href="{% url 'registration' %}">Зарегистрироваться <i class="fa-solid fa-address-card"></i></a></li>
@@ -41,9 +46,14 @@
 
 </header>
 
+
 {% block main %}
 
 {% endblock main %}
 
+
+{% block extra_scripts %}
+<script src="{% static 'js/searchForm.js' %}"></script>
+{% endblock extra_scripts %}
 </body>
 </html>

@@ -1,5 +1,11 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load tz %}
+
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/event_detail.css' %}">
+
+{% endblock extra_styles %}
 
 
 {% block main %}
@@ -7,9 +13,62 @@
 
 <div class="">
 
-    <h1>
-        {{ event.title }}
-    </h1>
+
+    <header class="img-wrapper">
+        <img src="{{ event.image.url }}" alt="">
+
+    </header>
+
+    <div class="event-content">
+
+        <div class="about-wrapper">
+
+            <div class="about-info">
+
+                <h1 class="event-title">
+                    {{ event.title }}
+                </h1>
+
+                <p>{{ event.description }}</p>
+
+                <span class="event_date">{{ event.event_date }}</span>
+
+                {% now "Y-m-d" as current_date %}
+
+                {% if event.event_date|date:"Y-m-d" >= current_date %}
+
+                {% if request.user not in event.users.all %}
+
+                <form action="{% url 'sub' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="event" value="{{ event.pk }}">
+                    <button class="event-btn">Подписаться</button>
+                </form>
+                {% else %}
+                <h2>Вы записаны на событие</h2>
+                {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <ul class="speakers">
+            {% for speaker in event.speakers.all %}
+            <li class="speaker-item">
+                <div class="specker-img-wrapper">
+                    <img src="{{ speaker.image.url }}" alt="">
+                </div>
+
+                <div class="">
+                    <h3>{{ speaker.first_name }} {{ speaker.last_name }} {{ speaker.surname }}</h3>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
 
 </div>
 

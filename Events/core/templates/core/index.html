@@ -1,14 +1,90 @@
 {% extends 'core/base.html' %}
 {% load static %}
-
+{% load tz %}
 
 {% block main %}
 
-<h1 class="main-title">События</h1>
+<form class="search-form" action="">
+
+    <div class="search-header">
+        <button type="button" id="location-btn" class="location-btn search-open-list-btn">Город <i class="fa-solid fa-angle-down"></i></button>
+        <button type="button" id="topic-btn" class="topic-btn search-open-list-btn">Тема <i class="fa-solid fa-angle-down"></i></button>
+        <label class="search-text-label" for="search-text">
+            <input class="search-text" type="text" name="search-text" id="search-text">
+            <button class="search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </label>
+    </div>
+
+    <div class="search-condition" id="search-condition">
+
+    </div>
+
+    <div class="search-list">
+        <div class="search-multiple-select" id="location-list" data-open="0">
+            {% for location in locations %}
+            <label class="search-checkbox" for="location_{{location.pk}}">
+                <input class="checkbox-input" type="checkbox" name="location" value="{{location.pk}}"
+                       id="location_{{location.pk}}">
+                {{ location.title }}
+                <span data-checked="0" id="location_checkbox_{{topic.pk}}" class="checkbox">{{ location.title }}</span>
+            </label>
+            {% endfor %}
+        </div>
+        <div class="search-multiple-select" id="topic-list" data-open="0">
+            {% for topic in topics %}
+            <label class="search-checkbox" for="topic_{{topic.pk}}">
+                <input class="checkbox-input" type="checkbox" name="topic" value="{{topic.pk}}" id="topic_{{topic.pk}}">
+                {{ topic.title }}
+                <span data-checked="0" id="topic_checkbox_{{topic.pk}}" class="checkbox">{{ topic.title }}</span>
+            </label>
+            {% endfor %}
+        </div>
+    </div>
+
+</form>
+{% if events_recently %}
+<h2 class="main-title">Скоро</h2>
 
 <div class="events_container">
 
-    {% for event in events %}
+    {% for event in events_recently %}
+
+    {% now "Y-m-d" as current_date %}
+
+    <div class="event">
+
+        <div class="img_wrapper">
+            <img src="{{ event.image.url }}" alt="">
+        </div>
+
+        {% now "Y-m-d" as current_date %}
+
+        <div class="event_info {% if event.event_date|date:'Y-m-d' == current_date %}today{% endif %}">
+            <span class="event_date">{{ event.event_date }}</span>
+            <h2 class="event_title">{{ event.title }}</h2>
+
+            <div class="success">
+                Регистрация открыта
+            </div>
+        </div>
+
+        <a class="event_link" href="{% url 'event_detail' event.pk %}"></a>
+
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+{% if events_past %}
+<h2 class="main-title">Недавно</h2>
+
+<div class="events_container">
+
+    {% for event in events_past %}
 
     <div class="event">
 
@@ -31,5 +107,6 @@
     {% endfor %}
 
 </div>
+{% endif %}
 
 {% endblock main %}

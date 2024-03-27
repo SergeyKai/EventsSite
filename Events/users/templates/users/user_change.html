@@ -3,16 +3,17 @@
 
 {% block extra_styles %}
 <link rel="stylesheet" href="{% static 'css/user_forms.css' %}">
+<link rel="stylesheet" href="{% static 'css/user-form-normalize.css' %}">
 {% endblock extra_styles %}
 
 {% block main %}
 
-<form class="user-form" method="post">
+<form class="user-form" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{ form }}
 
-    <button type="submit">Зарегистрироваться</button>
+    <button class="submit-btn" type="submit">Сохранить</button>
 </form>
 
 {% endblock main %}

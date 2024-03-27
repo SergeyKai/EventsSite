@@ -1,15 +1,66 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block extra_styles %}
+<link rel="stylesheet" href="{% static 'css/user.css' %}">
+{% endblock extra_styles %}
 
 {% block main %}
 
-<h1>{{ request.user }}</h1>
+<div class="user-info">
 
-<form method="post" action="{% url 'logout' %}">
-    {% csrf_token %}
-    <button type="submit">logout</button>
-</form>
+    <div class="user-info-wrapper">
+
+        <h2 class="user-title">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+
+        <p class="user-info-text">Имя пользователя: <span>{{ request.user }}</span></p>
+        <p class="user-info-text">E-mail: <span>{{ request.user.email }}</span></p>
+
+        <a class="change-user-info" href="{% url 'change_info' %}">Редактировать информацию <i
+                class="fa-solid fa-pen"></i></a>
+
+    </div>
+
+
+</div>
+
+{% if request.user.events.all %}
+
+<h2 class="main-title">Вы подписаны</h2>
+
+<div class="events">
+
+
+    {% for event in request.user.events.all %}
+
+    <div class="event">
+
+        <div class="img_wrapper">
+            <img src="{{ event.image.url }}" alt="">
+        </div>
+
+        <div class="event_info">
+            <span class="event_date">{{ event.event_date }}</span>
+            <h2 class="event_title">{{ event.title }}</h2>
+
+
+        </div>
+
+        <a class="event_link" href="{% url 'event_detail' event.pk %}"></a>
+
+
+    </div>
+
+    {% endfor %}
+
+
+</div>
+
+{% else %}
+
+<h2 class="main-title">Вы не подписаны ни на одно событие <a href="{% url 'home' %}">перейти к ивентам</a></h2>
+
+{% endif %}
 
 {% endblock main %}
 

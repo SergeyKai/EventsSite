@@ -1,0 +1,63 @@
+.user-info {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+
+    display: flex;
+
+
+}
+
+.logout-btn:hover {
+    color: #cd8afa;
+}
+
+
+.events {
+    width: 90%;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    
+}
+
+
+
+.change-user-info {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: #e1b4ff;
+    color: #8647e6;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all .2s;
+    text-decoration: none;
+}
+
+.change-user-info:hover {
+    color: #7435d3;
+}
+
+.user-title {
+    color: #252124;
+    font-size: 38px;
+}
+
+
+.user-info-text {
+    color: #252124;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.user-info-text span {
+    font-weight: 400;
+}
+
+.main-title {
+    color: #252124;
+    font-size: 38px;
+}
