@@ -8,7 +8,7 @@ User = get_user_model()
 class Speaker(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
+    surname = models.CharField(max_length=100, blank=True, null=True)
 
     image = models.ImageField(upload_to='speaker')
 
@@ -53,7 +53,7 @@ class Event(models.Model):
 
     create_date = models.DateTimeField(auto_now=True)
 
-    users = models.ManyToManyField(User, related_name='events', blank=True, null=True)
+    users = models.ManyToManyField(User, related_name='events', blank=True)
     speakers = models.ManyToManyField(Speaker, related_name='events')
 
     class Meta:

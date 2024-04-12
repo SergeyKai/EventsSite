@@ -24,11 +24,13 @@
 
 
 <header class="main-header">
-
-    <menu class="main-menu">
-        <li><a href="{% url 'home' %}"><i class="fa-solid fa-house"></i></a></li>
+    <div class="menu-callapse" id="menu-callapse">
+        <i class="fa-solid fa-bars"></i>
+    </div>
+    <menu class="main-menu" id="main-menu" data-open="0">
+        <li><a href="{% url 'home' %}" class="home-link"><i class="fa-solid fa-house"></i></a></li>
         {% if request.user.is_authenticated %}
-        <li class="user-data"><div class="user-img-wrapper"><img src="{{ request.user.photo.url }}" alt=""></div><a href="{% url 'profile' %}">{{ request.user }} <i class="fa-solid fa-user"></i></a></li>
+        <li class="user-data"><div class="user-img-wrapper"><img src="{{ request.user.photo.url }}" alt=""></div><a href="{% url 'profile' %}">{{ request.user }}</a></li>
         <li>
             <form method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
@@ -54,6 +56,7 @@
 
 {% block extra_scripts %}
 <script src="{% static 'js/searchForm.js' %}"></script>
+<script src="{% static 'js/menu.js' %}"></script>
 {% endblock extra_scripts %}
 </body>
 </html>

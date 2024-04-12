@@ -197,7 +197,7 @@ body {
 .main-menu li a {
     text-decoration: none;
     font-weight: 600;
-    font-size: 21px;
+    font-size: 28px;
 
     color: #8647e6;
 
@@ -228,9 +228,12 @@ body {
 
 }
 
+
 .search-open-list-btn {
     padding: 10px 20px;
     background-color: #e1b4ff;
+
+    font-size: 16px;
 
     border-radius: 15px;
 
@@ -288,9 +291,6 @@ body {
     width: 100%;
     min-height: 5vh;
     margin-top: 2vh;
-    margin-bottom: 10vh;
-
-
 }
 
 .checkbox-input {
@@ -399,4 +399,109 @@ body {
 
 .today {
     background-color: #ffe760;
+}
+
+
+.menu-callapse {
+    /* display: none; */
+    visibility: hidden;
+
+    font-size: 50px;
+    color: #8647e6;
+}
+
+
+
+@media(max-width:1200px) {
+
+
+    .main-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+
+        display: flex;
+        flex-direction: column;
+        height: auto;
+
+        z-index: 100;
+    }
+
+    .main-menu {
+        display: none;
+        flex-direction: column;
+        padding: 0;
+
+    }
+
+    .logout-btn {
+        font-size: 45px;
+    }
+
+    .main-menu li {
+        margin: 20px 0;
+        
+    }
+
+    .main-menu li a{
+        font-size: 45px;
+    }
+
+    .menu-callapse {
+        visibility: visible;
+    }
+
+    .search-form {
+        position: relative;
+
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 15vh 0 0 0;
+
+        flex-direction: column;
+    }
+
+    #topic-btn {
+        margin: 0 10px;
+    }
+
+    .search-form button {
+        font-size: 25px;
+    }
+    .search-text-label {
+        height: 40px;
+    }
+    .search-text {
+        font-size: 25px;
+    }
+
+    .events_container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .event {
+        position: relative;
+
+        width: 75%;
+        min-height: 700px;
+        margin-bottom: 50px;
+    } 
+
+    .sub-title {
+        position: absolute;
+
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+    }
+}
+
+.home-link {
+    font-size: 30px;
 }

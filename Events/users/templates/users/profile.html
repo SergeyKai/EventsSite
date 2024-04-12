@@ -14,7 +14,6 @@
         <h2 class="user-title">{{ request.user.first_name }} {{ request.user.last_name }}</h2>
 
         <p class="user-info-text">Имя пользователя: <span>{{ request.user }}</span></p>
-        <p class="user-info-text">E-mail: <span>{{ request.user.email }}</span></p>
 
         <a class="change-user-info" href="{% url 'change_info' %}">Редактировать информацию <i
                 class="fa-solid fa-pen"></i></a>
