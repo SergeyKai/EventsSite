@@ -11,9 +11,11 @@ def registration(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+    else:
+        form = CustomUserCreationForm()
 
     ctx = {
-        'form': CustomUserCreationForm()
+        'form': form
     }
 
     return render(request, 'users/registration.html', context=ctx)
