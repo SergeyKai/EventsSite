@@ -12,7 +12,7 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function showAllert(success = true) {
+async function showAlert(success = true) {
     let alertMsg = document.createElement('div');
     alertMsg.className = 'alert '
     if (success) {
@@ -30,34 +30,34 @@ async function showAllert(success = true) {
 
 async function subFunc(event) {
     let btn = event.srcElement
-    let responce = await sendRequest('sub', btn.dataset.pk);
-    if (responce.ok) {
+    let response = await sendRequest('sub', btn.dataset.pk);
+    if (response.ok) {
         btn.textContent = 'Отписаться';
         btn.id = 'un_sub_btn'
         btn.addEventListener('click', unSubFunc);
-        showAllert()
+        showAlert()
     } else {
-        showAllert(false)
+        showAlert(false)
     }
 }
 
 async function unSubFunc(event) {
     let btn = event.srcElement
-    let responce = await sendRequest('un_sub', btn.dataset.pk);
-    if (responce.ok) {
+    let response = await sendRequest('un_sub', btn.dataset.pk);
+    if (response.ok) {
         btn.textContent = 'Подписаться';
         btn.id = 'sub_btn'
         btn.addEventListener('click', subFunc)
-        showAllert()
+        showAlert()
     } else {
-        showAllert(false)
+        showAlert(false)
     }
 }
 
 
 async function sendRequest(url, pk) {
     const csrfToken = getCookie('csrftoken');
-    const responce = await fetch('http://127.0.0.1:8000/' + url + '/', {
+    const response = await fetch('http://127.0.0.1:8000/' + url + '/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ async function sendRequest(url, pk) {
         },
         body: JSON.stringify({'event': pk})
     })
-    return responce
+    return response
 }
 
 function getCookie(name) {
