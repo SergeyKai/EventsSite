@@ -1,12 +1,12 @@
+import json
+
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.utils import timezone
 
 from django.db.models import Q
-
-# from datetime import datetime
 
 from . import models
 
@@ -53,10 +53,23 @@ def event_detail(request, event_pk):
 @login_required
 def sub(request):
     if request.method == 'POST':
-        event_pk = request.POST.get('event')
+        data = json.loads(request.body)
+        event_pk = data.get('event')
         event = models.Event.objects.get(pk=event_pk)
         event.users.add(request.user)
         event.save()
-        return redirect(reverse('event_detail', kwargs={'event_pk': event_pk}))
+        return JsonResponse({'status': 'success'})
     else:
-        return redirect(reverse('home'))
+        return HttpResponse(status=405)
+
+
+@login_required
+def un_sub(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        event_pk = data.get('event')
+        event = request.user.events.get(pk=event_pk)
+        request.user.events.remove(event)
+        return JsonResponse({'status': 'success'})
+    else:
+        return HttpResponse(status=405)

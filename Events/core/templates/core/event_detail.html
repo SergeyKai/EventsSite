@@ -37,15 +37,20 @@
 
                 {% if event.event_date|date:"Y-m-d" >= current_date %}
 
-                {% if request.user not in event.users.all %}
-
                 <form action="{% url 'sub' %}" method="post">
                     {% csrf_token %}
                     <input type="hidden" name="event" value="{{ event.pk }}">
-                    <button class="event-btn">Подписаться</button>
                 </form>
+                {% if request.user not in event.users.all %}
+                <button id="sub_btn" class="event-btn" data-pk="{{ event.pk }}">Подписаться</button>
                 {% else %}
-                <h2>Вы записаны на событие</h2>
+                <!--                <form action="{% url 'un_sub' %}" method="post">-->
+                <!--                    <h2>Вы записаны на событие</h2>-->
+                <!--                    {% csrf_token %}-->
+                <!--                    <input type="hidden" name="event" value="{{ event.pk }}">-->
+                <!--                    <button class="event-btn">Отписаться</button>-->
+                <!--                </form>-->
+                <button id="un_sub_btn" class="event-btn" data-pk="{{ event.pk }}">Отписаться</button>
                 {% endif %}
 
                 {% endif %}
@@ -62,7 +67,11 @@
                 </div>
 
                 <div class="">
-                    <h3>{{ speaker.first_name }} {{ speaker.last_name }} {{ speaker.surname }}</h3>
+                    <h3>
+                        {{ speaker.first_name }}
+                        {{ speaker.last_name }}
+                        {% if speaker.surname %} {{ speaker.surname }} {% endif %}
+                    </h3>
                 </div>
             </li>
             {% endfor %}
@@ -72,6 +81,14 @@
 
 </div>
 
+<!--<div class="alert alert-success">-->
+<!--Ошибка!-->
+<!--</div>-->
+
 {% endblock main %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/subscription.js' %}"></script>
+{% endblock extra_scripts %}
 
 
