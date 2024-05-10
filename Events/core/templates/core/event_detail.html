@@ -42,7 +42,7 @@
                     <input type="hidden" name="event" value="{{ event.pk }}">
                 </form>
                 {% if request.user not in event.users.all %}
-                <button id="sub_btn" class="event-btn" data-pk="{{ event.pk }}">Подписаться</button>
+                <button id="sub_btn" class="event-btn" data-pk="{{ event.pk }}" data-sub="sub">Подписаться</button>
                 {% else %}
                 <!--                <form action="{% url 'un_sub' %}" method="post">-->
                 <!--                    <h2>Вы записаны на событие</h2>-->
@@ -50,7 +50,7 @@
                 <!--                    <input type="hidden" name="event" value="{{ event.pk }}">-->
                 <!--                    <button class="event-btn">Отписаться</button>-->
                 <!--                </form>-->
-                <button id="un_sub_btn" class="event-btn" data-pk="{{ event.pk }}">Отписаться</button>
+                <button id="sub_btn" class="event-btn" data-pk="{{ event.pk }}" data-sub="un_sub">Отписаться</button>
                 {% endif %}
 
                 {% endif %}
@@ -59,7 +59,9 @@
 
         </div>
 
+
         <ul class="speakers">
+            <li><h2 class="event-title">Спикеры</h2></li>
             {% for speaker in event.speakers.all %}
             <li class="speaker-item">
                 <div class="specker-img-wrapper">

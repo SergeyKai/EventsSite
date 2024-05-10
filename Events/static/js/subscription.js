@@ -1,12 +1,10 @@
 let subBtn = document.getElementById('sub_btn');
-let unSubBtn = document.getElementById('un_sub_btn');
+
+let btnActive = true;
 
 if (subBtn) {
     subBtn.addEventListener('click', subFunc);
-} else if (unSubBtn) {
-    unSubBtn.addEventListener('click', unSubFunc);
-
-}
+} 
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -23,37 +21,59 @@ async function showAlert(success = true) {
         alertMsg.className += 'alert-error';
     }
 
-    document.body.appendChild(alertMsg)
-    await sleep(3000)
-    alertMsg.remove()
+    document.body.appendChild(alertMsg);
+    await sleep(3000);
+    alertMsg.remove();
 }
 
 async function subFunc(event) {
-    let btn = event.srcElement
-    let response = await sendRequest('sub', btn.dataset.pk);
-    if (response.ok) {
-        btn.textContent = 'Отписаться';
-        btn.id = 'un_sub_btn'
-        btn.addEventListener('click', unSubFunc);
-        showAlert()
-    } else {
-        showAlert(false)
-    }
-}
 
-async function unSubFunc(event) {
-    let btn = event.srcElement
-    let response = await sendRequest('un_sub', btn.dataset.pk);
-    if (response.ok) {
-        btn.textContent = 'Подписаться';
-        btn.id = 'sub_btn'
-        btn.addEventListener('click', subFunc)
-        showAlert()
-    } else {
-        showAlert(false)
-    }
-}
+    let user = getCookie('sessionid');
+    console.log(user);
 
+    if (!btnActive) return;
+    btnActive = false
+
+    let btn = event.srcElement
+
+    if (btn.dataset.sub == 'sub') {
+        let response = await sendRequest('sub', btn.dataset.pk);
+
+        if (response.redirected) {
+            window.location.href = response.url
+            return
+        }
+
+        if (response.ok) {
+            btn.textContent = 'Отписаться';
+            btn.dataset.sub = 'un_sub';
+            showAlert();
+        } else {
+            showAlert(false);
+        }
+
+    } else if (btn.dataset.sub == 'un_sub') {
+        let response = await sendRequest('un_sub', btn.dataset.pk);
+
+        if (response.redirected) {
+            window.location.href = response.url
+            return
+        }
+
+        if (response.ok) {
+            btn.textContent = 'Подписаться';
+            btn.dataset.sub = 'sub';
+            showAlert();
+        } else {
+            showAlert(false);
+        }
+
+    }
+
+    await sleep(2000);
+    btnActive = true;
+
+}
 
 async function sendRequest(url, pk) {
     const csrfToken = getCookie('csrftoken');
@@ -65,6 +85,7 @@ async function sendRequest(url, pk) {
         },
         body: JSON.stringify({'event': pk})
     })
+    
     return response
 }
 
